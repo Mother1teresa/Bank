@@ -16,88 +16,103 @@ const password = ref("");
 const passwordConfirm = ref("");
 // Function to create a new user
 const createUser = async () => {
-    try {
-        if (validateInput()) {
-            // Create new user
-            const user = await $pb?.collection("users").create({
-                email: email.value,
-                username: "unnamed",
-                password: password.value,
-                passwordConfirm: passwordConfirm.value
-            });
-            if (user) {
-                // Authenticate the user in order to set the username
-                await authUser();
-                // After succesfull user registration, redirect to dashboard
-                router.push({ path: "/dashboard" });
-            } else {
-                console.log("Error");
-            }
-        } else {
-            alert("Password doesn't match");
-        }
-    } catch (error) {
-        console.log("create user error")
-        console.log(error);
+  try {
+    if (validateInput()) {
+      // Create new user
+      const user = await $pb?.collection("users").create({
+        email: email.value,
+        username: "unnamed",
+        password: password.value,
+        passwordConfirm: passwordConfirm.value,
+      });
+      if (user) {
+        // Authenticate the user in order to set the username
+        await authUser();
+        // After succesfull user registration, redirect to dashboard
+        router.push({ path: "/dashboard" });
+      } else {
+        console.log("Error");
+      }
+    } else {
+      alert("Password doesn't match");
     }
+  } catch (error) {
+    console.log("create user error");
+    console.log(error);
+  }
 };
 // Function to authenticate the user based on email and password
 const authUser = async () => {
-    try {
-        // Authenticate the user via email and password
-        const userData = await $pb
-            ?.collection("users")
-            .authWithPassword(email.value, password.value);
-          if (userData) {
-            userStore.userID = userData.record.id;
-            userStore.username = userData.record.profile?.username;
-            userStore.userProfileID = userData.record.profile?.id;
-            router.push({ path: "/dashboard" });
-        }
-    } catch (error) {
-        console.log("auth user error")
-        console.log(error);
+  try {
+    // Authenticate the user via email and password
+    const userData = await $pb
+      ?.collection("users")
+      .authWithPassword(email.value, password.value);
+    if (userData) {
+      userStore.userID = userData.record.id;
+      userStore.username = userData.record.profile?.username;
+      userStore.userProfileID = userData.record.profile?.id;
+      router.push({ path: "/dashboard" });
     }
+  } catch (error) {
+    console.log("auth user error");
+    console.log(error);
+  }
 };
 // Simple utility function to validate input. Easiliy extendable with additional checks if needed
 const validateInput = () => {
-    if (password.value !== passwordConfirm.value) {
-        return false;
-    } else {
-        return true;
-    }
+  if (password.value !== passwordConfirm.value) {
+    return false;
+  } else {
+    return true;
+  }
 };
-
 </script>
-
 
 <template>
   <div class="login-root">
     <div class="formbg-outer">
       <div class="form">
         <div class="form-inner">
-          <RouterLink to="/">
-            <div class="arrow arrow-left"></div
-          ></RouterLink>
+          <RouterLink to="/"> <div class="arrow arrow-left"></div></RouterLink>
           <span class="form-inner__title">Зарегистрируйте аккаунт</span>
           <form id="registration-form" @submit.prevent="createUser">
             <div class="field">
               <label for="email">Email</label>
-              <input type="email" class="email" name="email" v-model="email" required>
+              <input
+                type="email"
+                class="email"
+                name="email"
+                v-model="email"
+                required
+              />
               <!-- v-model="email" -->
             </div>
             <div class="field">
               <label for="password">Password</label>
-              <input type="password" class="password" name="password"  v-model="password" required/>
+              <input
+                type="password"
+                class="password"
+                name="password"
+                v-model="password"
+                required
+              />
               <!-- v-model="password" -->
             </div>
             <div class="field">
               <label for="confirm-password">Confirm Password</label>
-              <input type="password" class="confirmPassword" name="confirm-password" v-model="passwordConfirm" required/>
+              <input
+                type="password"
+                class="confirmPassword"
+                name="confirm-password"
+                v-model="passwordConfirm"
+                required
+              />
             </div>
             <div class="field">
-              <button class="btn-form" type="submit" name="submit">Sign Up</button>
-              
+              <button class="btn-form" type="submit" name="submit">
+                Sign Up
+              </button>
             </div>
           </form>
         </div>
@@ -195,19 +210,19 @@ label {
 .field {
   padding-bottom: 24px;
 }
-.btn-form{
- background-color: #273699;
- padding: 8px 18px;
- border:none;
- color: white;
- border-radius: 15px;
- cursor: pointer;
- border: none;
+.btn-form {
+  background-color: #273699;
+  padding: 8px 18px;
+  border: none;
+  color: white;
+  border-radius: 15px;
+  cursor: pointer;
+  border: none;
 }
-.btn-form:hover{
+.btn-form:hover {
   background-color: #1b2980;
 }
-.btn-form:active{
+.btn-form:active {
   background-color: #0f1b69;
 }
 

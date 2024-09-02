@@ -77,8 +77,6 @@ export default {
         });
     },
 
-    
-
     submitForm() {
       this.submitted = true; // Показать сообщение после отправки
     },
@@ -203,16 +201,43 @@ export default {
               class="form__input-box"
             >
               <div class="box-main__title">Оставьте заявку на консультацию</div>
-              <input class="input_box" type="number" placeholder="ИНН" id="unn" name="unn" minlength="12" maxlength="12" required
+              <input
+                class="input_box"
+                type="number"
+                placeholder="ИНН"
+                id="unn"
+                name="unn"
+                minlength="12"
+                maxlength="12"
+                required
               />
 
-              <input class="input_box" type="email" placeholder="Наименование компании" id="name_company" name="email" required
+              <input
+                class="input_box"
+                type="email"
+                placeholder="Наименование компании"
+                id="name_company"
+                name="email"
+                required
               />
 
-              <input class="input_box" id="name" placeholder="ФИО" name="name" required
+              <input
+                class="input_box"
+                id="name"
+                placeholder="ФИО"
+                name="name"
+                required
               />
 
-              <input class="input_box" type="number" id="tel" placeholder="Телефон" name="tel" minlength="8" maxlength="9" required
+              <input
+                class="input_box"
+                type="number"
+                id="tel"
+                placeholder="Телефон"
+                name="tel"
+                minlength="8"
+                maxlength="9"
+                required
               />
 
               <div class="main-applications-send">
@@ -229,7 +254,11 @@ export default {
             <!-- Сообщение после отправки формы -->
             <div v-if="submitted" class="thank-you-message">
               <div class="check">
-                <img src="/src/img/main/check.png" alt="" width="150px" height="150px"
+                <img
+                  src="/src/img/main/check.png"
+                  alt=""
+                  width="150px"
+                  height="150px"
                 />
               </div>
               <div class="gratitude">Спасибо!</div>
@@ -249,15 +278,36 @@ export default {
                   <div class="form__title">
                     Платежи клиентам других банков, в месяц
                   </div>
-                  <input class="input_box" type="number" placeholder="50 шт" id="payments" name="payments"  minlength="1"  required
+                  <input
+                    class="input_box"
+                    type="number"
+                    placeholder="50 шт"
+                    id="payments"
+                    name="payments"
+                    minlength="1"
+                    required
                   />
                   <div class="result">0 шт</div>
                   <div class="form__title">Внесение наличных в месяц, ₽</div>
-                  <input class="input_box"  minlength="1"   type="number" placeholder="7 750 000" id="insert" name="insert" required
+                  <input
+                    class="input_box"
+                    minlength="1"
+                    type="number"
+                    placeholder="7 750 000"
+                    id="insert"
+                    name="insert"
+                    required
                   />
                   <div class="result">0 ₽</div>
                   <div class="form__title">Снятие наличных в месяц, ₽</div>
-                  <input class="input_box" type="numder" minlength="1"  id="takeoff" placeholder="1 750 000" name="takeoff" required
+                  <input
+                    class="input_box"
+                    type="numder"
+                    minlength="1"
+                    id="takeoff"
+                    placeholder="1 750 000"
+                    name="takeoff"
+                    required
                   />
                   <div class="result">0 ₽</div>
                 </form>
@@ -551,7 +601,12 @@ export default {
         <div class="main-products">
           <div class="box-main__title">Дополнительные продукты для бизнеса</div>
           <div class="main-product-content">
-            <div class="main-product" :class="item.backgclass"  v-for="item in product" :key="item.id">
+            <div
+              class="main-product"
+              :class="item.backgclass"
+              v-for="item in product"
+              :key="item.id"
+            >
               <div class="main-product__title">
                 {{ item.productsTitle }}
               </div>
@@ -649,7 +704,11 @@ export default {
               </div>
             </div>
             <div class="box-info-line">
-              <div :class="key == 0 ?'info-line-one':'info-line-two'" v-for="(item,key) in INfo" :key="item.id">
+              <div
+                :class="key == 0 ? 'info-line-one' : 'info-line-two'"
+                v-for="(item, key) in INfo"
+                :key="item.id"
+              >
                 <div class="row">
                   <div class="col-5">
                     <div class="info-line__title">
@@ -663,7 +722,6 @@ export default {
                   </div>
                 </div>
               </div>
-              
 
               <div class="btn-gray">Показать ещё</div>
             </div>
